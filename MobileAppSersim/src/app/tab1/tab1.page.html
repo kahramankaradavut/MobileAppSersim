@@ -6,11 +6,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <input type="file" (change)="onFileSelected($event)" />
-    <ion-fab-button (click)="uploadPhoto()">
-      <ion-icon name="camera"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Seri Numarası</ion-label>
+    <ion-input [(ngModel)]="serialNumber"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="takePhoto()">Fotoğraf Çek</ion-button>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let img of images">
+        <ion-img [src]="img" class="thumbnail"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button expand="block" color="success" (click)="saveImages()">Gönder</ion-button>
 </ion-content>

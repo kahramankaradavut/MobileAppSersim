@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-import { PhotoService } from '../services/photo.service';
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { camera } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { HttpClientModule } from '@angular/common/http'; 
 
 
 
@@ -15,26 +15,47 @@ import { HttpClientModule } from '@angular/common/http';
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [ExploreContainerComponent, IonicModule, FormsModule, CommonModule, HttpClientModule],
+  imports: [ExploreContainerComponent, IonicModule, FormsModule, CommonModule, ],
 })
 export class Tab1Page {
+  serialNumber: string = '';
+  images: string[] = [];
 
-  selectedFile: File | null = null;
+  constructor() { addIcons({ camera }); }
 
-  constructor(public photoService: PhotoService) { addIcons({ camera }); }
+  async takePhoto() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Camera,
+    });
 
-
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
+    const base64Data = 'data:image/jpeg;base64,' + image.base64String;
+    this.images.push(base64Data);
   }
 
-  uploadPhoto() {
-    if (this.selectedFile) {
-      this.photoService.uploadImage(this.selectedFile).subscribe({
-        next: (res) => console.log('Başarılı:', res),
-        error: (err) => console.error('Hata:', err)
+  async saveImages() {
+    if (!this.serialNumber) {
+      alert("Lütfen seri numarası giriniz.");
+      return;
+    }
+
+    for (let i = 0; i < this.images.length; i++) {
+      const fileName = `image_${i}.jpeg`;
+      const path = `${this.serialNumber}/${fileName}`;
+
+      await Filesystem.writeFile({
+        path,
+        data: this.images[i],
+        directory: Directory.Documents, 
       });
     }
+
+    console.log('RREADDIR: ' ,Filesystem.readdir);
+    alert("Fotoğraflar başarıyla kaydedildi.");
+    this.images = [];
+    this.serialNumber = '';
   }
 
 
