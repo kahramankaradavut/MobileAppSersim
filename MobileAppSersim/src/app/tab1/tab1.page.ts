@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { camera } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { AuthService } from 'src/app/auth/auth.service';
+import { logOutOutline, sendOutline } from 'ionicons/icons';
 
 
 @Component({
@@ -15,13 +14,13 @@ import { AuthService } from 'src/app/auth/auth.service';
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [ExploreContainerComponent, IonicModule, FormsModule, CommonModule, ],
+  imports: [ IonicModule, FormsModule, CommonModule],
 })
 export class Tab1Page {
   serialNumber: string = '';
   images: string[] = [];
 
-  constructor(private authService: AuthService) { addIcons({ camera }); }
+  constructor(private authService: AuthService) { addIcons({ camera , logOutOutline, sendOutline}); }
 
   async takePhoto() {
     const image = await Camera.getPhoto({
@@ -49,7 +48,7 @@ export class Tab1Page {
     try {
       const token = this.authService.getToken();
 
-      const response = await fetch('http://localhost:5113/api/PhotoUpload', {
+      const response = await fetch('https://api2.sersim.com.tr/api/PhotoUpload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

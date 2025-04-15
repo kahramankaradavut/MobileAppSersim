@@ -6,7 +6,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:5113/api/Users';
+  private apiUrl = 'https://api2.sersim.com.tr/api/Users';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

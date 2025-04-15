@@ -1,23 +1,25 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title class="ionTitle">
-      foto çek
-    </ion-title>
+<ion-header style="display: flex; justify-content: space-between; text-align: center;">
+  <ion-toolbar> 
     <ion-buttons slot="start">
-      <ion-button (click)="logout()" fill="outline" color="light">
-        Çıkış Yap
-      </ion-button> 
+      <ion-button fill="solid" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+        Çıkış
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Solid Buttons</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="solid" (click)="saveImages()">
+        <ion-icon slot="end" name="send-outline"></ion-icon>
+        Gönder
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-item>
-    <ion-label position="floating">Seri Numarası</ion-label>
-    <ion-input [(ngModel)]="serialNumber"></ion-input>
+    <ion-input [(ngModel)]="serialNumber" label="Seri Numarası" label-placement="floating" placeholder="Seri numarası giriniz"></ion-input>
   </ion-item>
-
-  <ion-button expand="block" (click)="takePhoto()">Fotoğraf Çek</ion-button>
 
   <ion-grid>
     <ion-row>
@@ -26,6 +28,9 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <ion-button expand="block" color="success" (click)="saveImages()">Gönder</ion-button>
 </ion-content>
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab-button class="take-photo" (click)="takePhoto()">
+    <ion-icon name="camera"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
