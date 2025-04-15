@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+    <ion-toolbar class="custom-toolbar">
+      <div class="toolbar-logo">
+        <img src="../../assets/icon/sersim-yeni@300x.png" class="logo" />
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding content">
+    <h1 class="title">Giriş Paneli</h1>
+  
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-input [(ngModel)]="username" label="Kullanıcı Adı" label-placement="floating"></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-input [(ngModel)]="password" type="password" label="Şifre" label-placement="floating"></ion-input>
+        </ion-item>
+      
+        <ion-button expand="block" (click)="login()" class="login-button">Giriş Yap</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+  

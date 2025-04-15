@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { camera } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-
+import { AuthService } from 'src/app/auth/auth.service';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class Tab1Page {
   serialNumber: string = '';
   images: string[] = [];
 
-  constructor() { addIcons({ camera }); }
+  constructor(private authService: AuthService) { addIcons({ camera }); }
 
   async takePhoto() {
     const image = await Camera.getPhoto({
@@ -40,49 +40,36 @@ export class Tab1Page {
       alert("Lütfen seri numarası giriniz.");
       return;
     }
+  
+    const payload = {
+      serialNumber: this.serialNumber,
+      base64Images: this.images.map(img => img.replace(/^data:image\/jpeg;base64,/, ''))
+    };
+  
+    try {
+      const token = this.authService.getToken();
 
-    for (let i = 0; i < this.images.length; i++) {
-      const fileName = `image_${i}.jpeg`;
-      const path = `${this.serialNumber}/${fileName}`;
-
-      await Filesystem.writeFile({
-        path,
-        data: this.images[i],
-        directory: Directory.Documents, 
+      const response = await fetch('http://localhost:5113/api/PhotoUpload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`  
+        },
+        body: JSON.stringify(payload),
       });
+  
+      const result = await response.json();
+      alert(result.message);
+      this.images = [];
+      this.serialNumber = '';
+    } catch (error) {
+      console.error("API hatası:", error);
+      alert("Fotoğraflar gönderilemedi.");
     }
-
-    console.log('RREADDIR: ' ,Filesystem.readdir);
-    alert("Fotoğraflar başarıyla kaydedildi.");
-    this.images = [];
-    this.serialNumber = '';
   }
 
-
-
-
-
-
-
-
-  // serialNumber: string = '';
-  // userName: string = 'Kullanıcı Adı'; // Bu, giriş yapan kullanıcının ismi olmalı
-  // capturedPhotos: string[] = [];
-
-  // constructor(private photoService: PhotoService) {addIcons({ camera });}
-
-  // async capturePhoto() {
-  //   if (this.serialNumber.trim() === '') {
-  //     alert('Seri numarası boş olamaz!');
-  //     return;
-  //   }
-
-  //   try {
-  //     const savedFile = await this.photoService.capturePhoto(this.serialNumber, this.userName);
-  //     this.capturedPhotos.push(savedFile); // Fotoğrafı listeye ekle
-  //     console.log('Fotoğraf başarıyla kaydedildi:', savedFile);
-  //   } catch (error) {
-  //     console.error('Fotoğraf çekme hatası:', error);
-  //   }
-  // }
+  async logout() {
+    this.authService.logout();
+  }
+  
 }
