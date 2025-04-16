@@ -1,57 +1,56 @@
 /* Genel Arka Plan */
 ion-content {
-    --background: linear-gradient(to bottom, #d2e1f9, #ffffff);
-    padding-top: 20px;
-  }
-  
-  /* Header - Toolbar */
-  .custom-toolbar {
-    padding-bottom: 2%;
-    --background: linear-gradient(to right, #3b82f6, #6366f1);
-    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Ortalanmış Logo */
-  .toolbar-logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-  }
-  
-  .logo {
-    width: 40%;
-    height: auto;
-    // border-radius: 50%;
-    // box-shadow: 0 2px 9px rgba(255, 255, 255, 0.3);
-  }
-  
-  .title {
-    text-align: center;
-    color: #3e4b5b;
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 20px;
-  }
-  
-  .login-button{
-    --background: linear-gradient(to right, #156cf9d1, #5052ded0);
-  
-  }
-  
-  ion-content {
-    background-color: #f9f9f9; /* Yumuşak arka plan */
-    padding-top: 20px;
-  }
-  
-  ion-card {
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  
-      
+  --background: linear-gradient(to bottom, #d2e1f9, #ffffff);
+  padding-top: 20px;
+}
+
+/* Header - Toolbar */
+.custom-toolbar {
+  padding-bottom: 2%;
+  --background: linear-gradient(to right, #3b82f6, #6366f1);
+  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Ortalanmış Logo */
+.toolbar-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.logo {
+  width: 40%;
+  height: auto;
+  // border-radius: 50%;
+  // box-shadow: 0 2px 9px rgba(255, 255, 255, 0.3);
+}
+
+.title {
+  text-align: center;
+  color: #3e4b5b;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.login-button{
+  --background: linear-gradient(to right, #156cf9d1, #5052ded0);
+
+}
+
+ion-content {
+  background-color: #f9f9f9; /* Yumuşak arka plan */
+  padding-top: 20px;
+}
+
+ion-card {
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+

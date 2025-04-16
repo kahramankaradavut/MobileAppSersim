@@ -3,9 +3,14 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { NavController, ToastController, LoadingController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
-import { IonicModule } from '@ionic/angular';
+import { IonHeader } from '@ionic/angular/standalone';
+import { IonToolbar } from '@ionic/angular/standalone';
+import { IonContent } from '@ionic/angular/standalone';
+import { IonCard, IonCardContent } from '@ionic/angular/standalone';
+import { IonItem } from '@ionic/angular/standalone';
+import { IonInput } from '@ionic/angular/standalone';
+import { IonButton } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
-import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +18,14 @@ import { NgZone } from '@angular/core';
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
-  IonicModule, CommonModule, FormsModule
+  CommonModule, FormsModule, IonHeader,
+  IonToolbar,
+  IonContent,
+  IonCard,
+  IonCardContent,
+  IonItem,
+  IonInput,
+  IonButton
   ]
 })
 export class LoginPage {

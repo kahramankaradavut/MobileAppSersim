@@ -1,33 +1,56 @@
 import { Component } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { camera } from 'ionicons/icons';
-import { addIcons } from 'ionicons';
+import { IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, IonTitle, IonContent, IonItem, IonInput, IonGrid, IonRow, IonCol, IonImg, IonFab, IonFabButton } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
-import { logOutOutline, sendOutline } from 'ionicons/icons';
 
+// İkonlar
+import { addIcons } from 'ionicons';
+import { camera, logOutOutline, sendOutline } from 'ionicons/icons';
 
 @Component({
   standalone: true,
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [ IonicModule, FormsModule, CommonModule],
+  imports: [
+    IonicModule,
+    FormsModule,
+    CommonModule,
+    // Ionic bileşenleri standalone olarak eklenmiş hali
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonButton,
+    IonIcon,
+    IonTitle,
+    IonContent,
+    IonItem,
+    IonInput,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonImg,
+    IonFab,
+    IonFabButton
+  ],
 })
 export class Tab1Page {
   serialNumber: string = '';
   images: string[] = [];
 
-  constructor(private authService: AuthService) { addIcons({ camera , logOutOutline, sendOutline}); }
+  constructor(private authService: AuthService) {
+    addIcons({ camera, logOutOutline, sendOutline });
+  }
 
   async takePhoto() {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Base64,
-      source: CameraSource.Camera,
+      source: CameraSource.Prompt,
     });
 
     const base64Data = 'data:image/jpeg;base64,' + image.base64String;
@@ -39,12 +62,12 @@ export class Tab1Page {
       alert("Lütfen seri numarası giriniz.");
       return;
     }
-  
+
     const payload = {
       serialNumber: this.serialNumber,
       base64Images: this.images.map(img => img.replace(/^data:image\/jpeg;base64,/, ''))
     };
-  
+
     try {
       const token = this.authService.getToken();
 
@@ -52,11 +75,11 @@ export class Tab1Page {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`  
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(payload),
       });
-  
+
       const result = await response.json();
       alert(result.message);
       this.images = [];
@@ -70,5 +93,4 @@ export class Tab1Page {
   async logout() {
     this.authService.logout();
   }
-  
 }
