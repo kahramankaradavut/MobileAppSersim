@@ -1,0 +1,68 @@
+/* Genel Arka Plan */
+ion-content {
+    --background: linear-gradient(to bottom, #525c6c, #605d5d);
+    padding-top: 20px;
+  }
+  
+  /* Header - Toolbar */
+.custom-toolbar {
+  padding-bottom: 2%;
+  // --background: linear-gradient(to right, #3b82f6, #6366f1);
+  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.1);
+  position: relative; // Logo pozisyonlaması için önemli
+  min-height: 56px; // iOS / Android için tutarlılık
+}
+
+/* Ortalanmış Logo */
+.toolbar-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* Responsive Logo */
+.logo {
+  max-width: 180px; // maksimum boyut sınırlaması
+  width: 100%;
+  height: auto;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .logo {
+    max-width: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    max-width: 110px;
+  }
+}
+
+  
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+  
+  ion-content {
+    background-color: #f9f9f9; /* Yumuşak arka plan */
+    padding-top: 20px;
+  }
+  
+  
+  ion-card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  

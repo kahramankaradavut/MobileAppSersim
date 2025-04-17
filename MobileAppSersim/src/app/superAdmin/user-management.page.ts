@@ -8,6 +8,7 @@ import {
   IonButton,
   IonContent,
   IonCard,
+  IonIcon,
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
@@ -18,6 +19,7 @@ import {
   IonList,
   IonLabel,
   IonModal,
+  IonTitle,
   AlertController,
   LoadingController,
   ToastController
@@ -26,6 +28,8 @@ import {
 import { UserService } from '../services/user.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { camera, logOutOutline, sendOutline, scanCircleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-user-management',
@@ -36,6 +40,7 @@ import { Router } from '@angular/router';
     CommonModule,
     FormsModule,
     IonHeader,
+    IonIcon,
     IonToolbar,
     IonButtons,
     IonButton,
@@ -50,7 +55,8 @@ import { Router } from '@angular/router';
     IonSelectOption,
     IonList,
     IonLabel,
-    IonModal
+    IonModal,
+    IonTitle
   ]
 })
 export class UserManagementPage {
@@ -66,7 +72,10 @@ export class UserManagementPage {
     private toastController: ToastController,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+    addIcons({ camera, logOutOutline, sendOutline, scanCircleOutline });
+
+  }
 
   async ionViewWillEnter() {
     const loading = await this.loadingCtrl.create({

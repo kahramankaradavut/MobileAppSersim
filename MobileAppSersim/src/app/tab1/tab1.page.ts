@@ -9,9 +9,13 @@ import {
   IonToolbar, 
   IonButtons,
   IonButton,
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
   IonIcon, 
   IonTitle, 
-  IonContent, 
   IonItem,
   IonInput,
   IonGrid, 
@@ -25,7 +29,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 
 // İkonlar
 import { addIcons } from 'ionicons';
-import { camera, logOutOutline, sendOutline } from 'ionicons/icons';
+import { camera, logOutOutline, sendOutline, scanCircleOutline } from 'ionicons/icons';
 
 @Component({
   standalone: true,
@@ -39,6 +43,10 @@ import { camera, logOutOutline, sendOutline } from 'ionicons/icons';
     IonToolbar,
     IonButtons,
     IonButton,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
     IonIcon,
     IonTitle,
     IonContent,
@@ -57,7 +65,7 @@ export class Tab1Page {
   images: string[] = [];
 
   constructor(private authService: AuthService) {
-    addIcons({ camera, logOutOutline, sendOutline });
+    addIcons({ camera, logOutOutline, sendOutline, scanCircleOutline });
   }
 
   async scanBarcode() {

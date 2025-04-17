@@ -1,9 +1,10 @@
 <ion-header [translucent]="true">
     <ion-toolbar class="custom-toolbar">
       <ion-buttons slot="start">
-        <ion-button (click)="logout()" fill="outline" color="light">
-          Çıkış Yap
-        </ion-button> 
+        <ion-button (click)="logout()" fill="outline">
+          <ion-icon name="log-out-outline"></ion-icon>
+          Çıkış
+        </ion-button>
       </ion-buttons>
       <div class="toolbar-logo">
         <img src="../../assets/icon/sersim-yeni@300x.png" class="logo" />
@@ -12,7 +13,7 @@
   </ion-header>
   
   <ion-content class="ion-padding content">
-    <h1 class="title">Admin Panel</h1>
+    <h1 class="title" color="warning">Admin Panel</h1>
   
     <!-- Kullanıcı Ekleme Formu -->
     <ion-card>
@@ -33,7 +34,7 @@
             <ion-select-option value="user">User</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-button expand="full" (click)="addUser()">Ekle</ion-button>
+        <ion-button expand="full" color="success" (click)="addUser()">Ekle</ion-button>
       </ion-card-content>
     </ion-card>
   
