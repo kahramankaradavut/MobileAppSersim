@@ -2,7 +2,25 @@ import { Component } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, IonTitle, IonContent, IonItem, IonInput, IonGrid, IonRow, IonCol, IonImg, IonFab, IonFabButton } from '@ionic/angular/standalone';
+import { CapacitorBarcodeScanner } from '@capacitor/barcode-scanner';
+import { CapacitorBarcodeScannerTypeHint } from '@capacitor/barcode-scanner';  // Enum import edilmiştir
+import { 
+  // IonHeader, 
+  // IonToolbar, 
+  // IonButtons,
+  // IonButton,
+  // IonIcon, 
+  // IonTitle, 
+  // IonContent, 
+  // IonItem,
+  // IonInput,
+  // IonGrid, 
+  // IonRow, 
+  // IonCol, 
+  // IonImg, 
+  // IonFab, 
+  // IonFabButton 
+} from '@ionic/angular/standalone';
 import { IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -20,21 +38,21 @@ import { camera, logOutOutline, sendOutline } from 'ionicons/icons';
     FormsModule,
     CommonModule,
     // Ionic bileşenleri standalone olarak eklenmiş hali
-    IonHeader,
-    IonToolbar,
-    IonButtons,
-    IonButton,
-    IonIcon,
-    IonTitle,
-    IonContent,
-    IonItem,
-    IonInput,
-    IonGrid,
-    IonRow,
-    IonCol,
-    IonImg,
-    IonFab,
-    IonFabButton
+    // IonHeader,
+    // IonToolbar,
+    // IonButtons,
+    // IonButton,
+    // IonIcon,
+    // IonTitle,
+    // IonContent,
+    // IonItem,
+    // IonInput,
+    // IonGrid,
+    // IonRow,
+    // IonCol,
+    // IonImg,
+    // IonFab,
+    // IonFabButton
   ],
 })
 export class Tab1Page {
@@ -44,6 +62,33 @@ export class Tab1Page {
   constructor(private authService: AuthService) {
     addIcons({ camera, logOutOutline, sendOutline });
   }
+
+  async scanBarcode() {
+    try {
+
+      const scanOptions = {
+        hint: CapacitorBarcodeScannerTypeHint.ALL,  
+        scanInstructions: 'Lütfen barkodu kameraya getirin',
+        scanButton: true,
+        scanText: 'Barkod Tara',
+      };
+
+      // Barkod taramasını başlat
+      const result = await CapacitorBarcodeScanner.scanBarcode(scanOptions);
+
+      if (result && result.ScanResult) {
+        this.serialNumber = result.ScanResult;  
+        alert(`Barkod tarandı: ${this.serialNumber}`);
+      } else {
+        alert('Barkod okunamadı.');
+      }
+    } catch (error) {
+      console.error("Barkod tarama hatası:", error);
+      alert("Barkod tarama sırasında bir hata oluştu.");
+    }
+  }
+
+  
 
   async takePhoto() {
     const image = await Camera.getPhoto({

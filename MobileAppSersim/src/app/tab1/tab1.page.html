@@ -20,7 +20,7 @@
   <ion-item>
     <ion-input [(ngModel)]="serialNumber" label="Seri Numarası" label-placement="floating" placeholder="Seri numarası giriniz"></ion-input>
   </ion-item>
-
+  <ion-button (click)="scanBarcode()">Barkod Tara</ion-button>
   <ion-grid>
     <ion-row>
       <ion-col size="6" *ngFor="let img of images">
