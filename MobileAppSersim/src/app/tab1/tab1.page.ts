@@ -3,25 +3,24 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CapacitorBarcodeScanner } from '@capacitor/barcode-scanner';
-import { CapacitorBarcodeScannerTypeHint } from '@capacitor/barcode-scanner';  // Enum import edilmiştir
+import { CapacitorBarcodeScannerTypeHint } from '@capacitor/barcode-scanner';  
 import { 
-  // IonHeader, 
-  // IonToolbar, 
-  // IonButtons,
-  // IonButton,
-  // IonIcon, 
-  // IonTitle, 
-  // IonContent, 
-  // IonItem,
-  // IonInput,
-  // IonGrid, 
-  // IonRow, 
-  // IonCol, 
-  // IonImg, 
-  // IonFab, 
-  // IonFabButton 
+  IonHeader, 
+  IonToolbar, 
+  IonButtons,
+  IonButton,
+  IonIcon, 
+  IonTitle, 
+  IonContent, 
+  IonItem,
+  IonInput,
+  IonGrid, 
+  IonRow, 
+  IonCol, 
+  IonImg, 
+  IonFab, 
+  IonFabButton 
 } from '@ionic/angular/standalone';
-import { IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 
 // İkonlar
@@ -34,25 +33,23 @@ import { camera, logOutOutline, sendOutline } from 'ionicons/icons';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   imports: [
-    IonicModule,
     FormsModule,
     CommonModule,
-    // Ionic bileşenleri standalone olarak eklenmiş hali
-    // IonHeader,
-    // IonToolbar,
-    // IonButtons,
-    // IonButton,
-    // IonIcon,
-    // IonTitle,
-    // IonContent,
-    // IonItem,
-    // IonInput,
-    // IonGrid,
-    // IonRow,
-    // IonCol,
-    // IonImg,
-    // IonFab,
-    // IonFabButton
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonButton,
+    IonIcon,
+    IonTitle,
+    IonContent,
+    IonItem,
+    IonInput,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonImg,
+    IonFab,
+    IonFabButton
   ],
 })
 export class Tab1Page {

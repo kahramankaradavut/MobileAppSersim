@@ -2,27 +2,26 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
-  // IonHeader,
-  // IonToolbar,
-  // IonButtons,
-  // IonButton,
-  // IonContent,
-  // IonCard,
-  // IonCardHeader,
-  // IonCardTitle,
-  // IonCardContent,
-  // IonItem,
-  // IonInput,
-  // IonSelect,
-  // IonSelectOption,
-  // IonList,
-  // IonLabel,
-  // IonModal,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonButton,
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
+  IonItem,
+  IonInput,
+  IonSelect,
+  IonSelectOption,
+  IonList,
+  IonLabel,
+  IonModal,
   AlertController,
   LoadingController,
   ToastController
 } from '@ionic/angular/standalone';
-import { IonicModule } from '@ionic/angular';
 
 import { UserService } from '../services/user.service';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -36,23 +35,22 @@ import { Router } from '@angular/router';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    // IonHeader,
-    // IonToolbar,
-    // IonButtons,
-    // IonButton,
-    // IonContent,
-    // IonCard,
-    // IonCardHeader,
-    // IonCardTitle,
-    // IonCardContent,
-    // IonItem,
-    // IonInput,
-    // IonSelect,
-    // IonSelectOption,
-    // IonList,
-    // IonLabel,
-    // IonModal
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonButton,
+    IonContent,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
+    IonItem,
+    IonInput,
+    IonSelect,
+    IonSelectOption,
+    IonList,
+    IonLabel,
+    IonModal
   ]
 })
 export class UserManagementPage {
