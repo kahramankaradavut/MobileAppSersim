@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>MobileAppSersim</string>
+        <string>MobileAppSersim</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -26,12 +26,6 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-    <key>NSCameraUsageDescription</key>
-	<string>Bu uygulama, fotoğraf çekmek için kameranızı kullanır.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Bu uygulama, fotoğraflarınıza erişmek için izin ister.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Bu uygulama, çektiğiniz fotoğrafları kaydedebilmek için galeriye erişmek ister.</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
