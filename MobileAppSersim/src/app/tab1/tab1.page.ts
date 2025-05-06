@@ -91,11 +91,22 @@ export class Tab1Page {
       const result = await CapacitorBarcodeScanner.scanBarcode(scanOptions);
 
       if (result && result.ScanResult) {
-        this.serialNumber = result.ScanResult;  
-        alert(`Barkod tarandı: ${this.serialNumber}`);
-      } else {
-        alert('Barkod okunamadı.');
-      }
+        const scanned = result.ScanResult;
+        
+        if (scanned.length === 18) {
+          const productCode = scanned.slice(0, 6);
+          const dateCode = scanned.slice(6, 12);
+          const extraCode = scanned.slice(12, 18);
+      
+          this.serialNumber = `${productCode}-${dateCode}-${extraCode}`;
+          alert(`Barkod tarandı: ${this.serialNumber}`);
+          console.log("Barkod ilk:", `${productCode}`);
+          console.log("Barkod ikinci:", `${dateCode}`);
+          console.log("Barkod üçüncü:", `${extraCode}`);
+        } else {
+          alert("Barkod 18 haneli olmalıdır.");
+        }
+      }      
     } catch (error) {
       console.error("Barkod tarama hatası:", error);
       alert("Barkod tarama sırasında bir hata oluştu.");
@@ -131,7 +142,7 @@ export class Tab1Page {
     try {
       const token = this.authService.getToken();
 
-      const response = await fetch('https://api2.sersim.com.tr/api/PhotoUpload', {
+      const response = await fetch('http://localhost:5113/api/PhotoUpload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
