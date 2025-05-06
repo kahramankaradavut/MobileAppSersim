@@ -23,20 +23,23 @@ import {
   IonCol, 
   IonImg, 
   IonFab, 
-  IonFabButton 
-} from '@ionic/angular/standalone';
+  IonFabButton, 
+  IonLabel,
+  IonSelect,
+  IonSelectOption } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/auth/auth.service';
 
 // İkonlar
 import { addIcons } from 'ionicons';
 import { camera, logOutOutline, sendOutline, scanCircleOutline } from 'ionicons/icons';
 
+
 @Component({
   standalone: true,
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [
+  imports: [IonLabel, 
     FormsModule,
     CommonModule,
     IonHeader,
@@ -57,12 +60,18 @@ import { camera, logOutOutline, sendOutline, scanCircleOutline } from 'ionicons/
     IonCol,
     IonImg,
     IonFab,
-    IonFabButton
+    IonFabButton,
+    IonSelect,
+    IonSelectOption
   ],
 })
 export class Tab1Page {
   serialNumber: string = '';
   images: string[] = [];
+
+  lengthUnit: number = 100;  // varsayılan birim
+  lengthUnits: number[] = [70, 100, 120, 150]; // birim seçenekleri
+
 
   constructor(private authService: AuthService) {
     addIcons({ camera, logOutOutline, sendOutline, scanCircleOutline });
@@ -115,7 +124,8 @@ export class Tab1Page {
 
     const payload = {
       serialNumber: this.serialNumber,
-      base64Images: this.images.map(img => img.replace(/^data:image\/jpeg;base64,/, ''))
+      base64Images: this.images.map(img => img.replace(/^data:image\/jpeg;base64,/, '')),
+      lengthUnit: this.lengthUnit
     };
 
     try {

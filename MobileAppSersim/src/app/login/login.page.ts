@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
-import { NavController, ToastController, LoadingController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
-import { IonHeader } from '@ionic/angular/standalone';
-import { IonToolbar } from '@ionic/angular/standalone';
-import { IonContent } from '@ionic/angular/standalone';
-import { IonCard, IonCardContent } from '@ionic/angular/standalone';
-import { IonItem } from '@ionic/angular/standalone';
-import { IonInput } from '@ionic/angular/standalone';
-import { IonButton } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
+import { 
+  IonInputPasswordToggle, 
+  IonHeader, 
+  IonToolbar, 
+  IonContent, 
+  IonCard, 
+  IonCardContent, 
+  IonItem, 
+  IonButton, 
+  IonInput 
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +22,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
-  CommonModule, FormsModule, IonHeader,
+  CommonModule,
+  FormsModule,
+  IonInputPasswordToggle, 
+  IonHeader,
   IonToolbar,
   IonContent,
   IonCard,
@@ -29,62 +36,57 @@ import { Router } from '@angular/router';
   ]
 })
 export class LoginPage {
-  isLoading = false; // Yükleme durumu
-  message = ''; // Kullanıcıya gösterilecek mesaj
   username = '';
   password = '';
 
   constructor(
     private authService: AuthService,
-    private navCtrl: NavController,
     private toastController: ToastController,
     private router: Router,  
     private loadingCtrl: LoadingController,
   ) {}
 
   async login() {
-    this.isLoading = true; // Yükleme başlıyor
-    this.message = 'Giriş yapılıyor, lütfen bekleyin...';
-    console.log('Giriş yapılıyor...');
-
-    // const loading = await this.loadingCtrl.create({
-    // message: 'Giriş yapılıyor...',
-    // spinner: 'crescent', // Dönebilen spinner
-    // });
-
-    // await loading.present();
-    console.log('Giriş yapılıyor...');
+    const loading = await this.loadingCtrl.create({
+      message: 'Giriş yapılıyor...',
+      spinner: 'circles'
+    });
+    await loading.present();
 
     this.authService.login({ username: this.username, password: this.password }).subscribe({
       next: async (res) => {
+        await loading.dismiss();
+
         this.authService.setToken(res.token, res.role);
 
-        this.isLoading = false;
-        this.message = ''; // Mesajı kaldır
-        
-        // await loading.dismiss();
-        console.log('Giriş başarılı:', res);
-        console.log('Kullanıcı rolü:', res.role);
+        const toast = await this.toastController.create({
+          message: 'Giriş başarılı!',
+          duration: 2000,
+          color: 'success',
+          position: 'bottom'
+        });
+        await toast.present();
         
         if (res.role === 'SuperAdmin') {
-          try {
-            console.log('SuperAdmin');
           this.router.navigate(['/superAdmin']);
-          } catch (error) {
-            console.error('Hata:', error);
-          }
         } else {
-          console.log('Kullanıcı');
-          this.navCtrl.navigateRoot('/tabs');
+          this.router.navigateByUrl('/', { replaceUrl: true }).then(() => {
+            this.router.navigateByUrl('/tabs/tab1');
+          });
         }
-
       },
-      error: async (res) => {
-        console.log('Giriş hatası:', res);
-        this.message = 'Giriş başarısız, lütfen tekrar deneyin.';
-        this.isLoading = false;
-        // await loading.dismiss();
-      },
+      error: async (err) => {
+        await loading.dismiss();
+        console.error('Giriş hatası:', err);
+  
+        const toast = await this.toastController.create({
+          message: 'Kullanıcı adı veya şifre hatalı!',
+          duration: 2500,
+          color: 'danger',
+          position: 'bottom'
+        });
+        await toast.present();
+      }
     });
   }
 }

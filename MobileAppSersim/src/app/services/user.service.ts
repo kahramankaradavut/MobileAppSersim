@@ -6,6 +6,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class UserService {
+  //private apiUrl = 'http://localhost:5113/api/Users';
   private apiUrl = 'https://api2.sersim.com.tr/api/Users';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
@@ -32,9 +33,5 @@ export class UserService {
   updateUser(userId: number, userData: any) {
     return this.http.put(`${this.apiUrl}/${userId}`, userData, { headers: this.getAuthHeaders() });
   }
-  
 
-  // updateUser(userId: number, user: any) {
-  //   return this.http.put(`${this.apiUrl}/${userId}`, user);
-  // }
 }

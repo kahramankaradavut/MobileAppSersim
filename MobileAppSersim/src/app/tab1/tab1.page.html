@@ -33,6 +33,15 @@
           <ion-icon name="scan-circle-outline"></ion-icon>
         </ion-button>
       </ion-item>
+      <ion-item>
+        <ion-label>Uzunluk</ion-label>
+        <ion-select [(ngModel)]="lengthUnit" interface="popover">
+          <ion-select-option *ngFor="let unit of lengthUnits" [value]="unit">
+            {{ unit }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      
       <ion-grid>
         <ion-row>
           <ion-col size="6" *ngFor="let img of images">
