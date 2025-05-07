@@ -119,7 +119,7 @@ export class Tab1Page {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
-      resultType: CameraResultType.Base64,
+      resultType: CameraResultType.Base64,  
       source: CameraSource.Prompt,
     });
 
