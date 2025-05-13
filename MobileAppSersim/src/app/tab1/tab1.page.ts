@@ -15,7 +15,6 @@ import {
   IonCardTitle,
   IonCardContent,
   IonIcon, 
-  IonTitle, 
   IonItem,
   IonInput,
   IonGrid, 
@@ -43,7 +42,7 @@ import { camera, logOutOutline, sendOutline, scanCircleOutline } from 'ionicons/
     FormsModule,
     CommonModule,
     IonHeader,
-    IonToolbar,
+    IonToolbar, 
     IonButtons,
     IonButton,
     IonCard,
@@ -51,7 +50,6 @@ import { camera, logOutOutline, sendOutline, scanCircleOutline } from 'ionicons/
     IonCardTitle,
     IonCardContent,
     IonIcon,
-    IonTitle,
     IonContent,
     IonItem,
     IonInput,
@@ -113,8 +111,6 @@ export class Tab1Page {
     }
   }
 
-  
-
   async takePhoto() {
     const image = await Camera.getPhoto({
       quality: 90,
@@ -142,7 +138,7 @@ export class Tab1Page {
     try {
       const token = this.authService.getToken();
 
-      const response = await fetch('http://localhost:5113/api/PhotoUpload', {
+      const response = await fetch('https://api2.sersim.com.tr/api/PhotoUpload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
